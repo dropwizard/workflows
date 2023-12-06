@@ -1,0 +1,15 @@
+---
+# yamllint disable rule:comments rule:line-length
+name: yamllint
+# yamllint disable-line rule:truthy
+on:
+  workflow_call:
+jobs:
+  yamllint:
+    name: "\U0001F9F9 yamllint"
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⤵️ Check out configuration from GitHub
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: 🧹 Run yamllint
+        uses: frenck/action-yamllint@4eff2494c5af06cb3d5a2a02505e288978e86d3a # v1.4.2
