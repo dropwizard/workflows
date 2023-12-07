@@ -3,7 +3,7 @@
 name: Trigger Release
 # yamllint disable-line rule:truthy
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       releaseVersion:
         description: Version of the next release
