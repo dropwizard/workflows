@@ -49,9 +49,9 @@ jobs:
           java-version: ${{ inputs.java-version }}
           cache: maven
           server-id: ${{ inputs.maven-server-id }}
-          server-username: ${{ secrets.CI_DEPLOY_USERNAME }}
-          server-password: ${{ secrets.CI_DEPLOY_PASSWORD }}
-          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          server-username: CI_DEPLOY_USERNAME
+          server-password: CI_DEPLOY_PASSWORD
+          gpg-passphrase: GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
       - name: Set up Git
         run: |
@@ -61,6 +61,10 @@ jobs:
           git config --global author.name "${GITHUB_ACTOR}"
       - name: Prepare release
         run: ./mvnw -B -V -ntp -Prelease -DreleaseVersion=${{ inputs.releaseVersion }} -DdevelopmentVersion=${{ inputs.developmentVersion }} release:prepare
+        env:
+          CI_DEPLOY_USERNAME: ${{ secrets.CI_DEPLOY_USERNAME }}
+          CI_DEPLOY_PASSWORD: ${{ secrets.CI_DEPLOY_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       - name: Rollback on failure
         if: failure()
         run: |
