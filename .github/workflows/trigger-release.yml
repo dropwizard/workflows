@@ -60,13 +60,12 @@ jobs:
           git config --global author.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global author.name "${GITHUB_ACTOR}"
       - name: Prepare release
-        run: ./mvnw -B -V -ntp -Prelease -DreleaseVersion=${{ inputs.releaseVersion }} -DdevelopmentVersion=${{ inputs.developmentVersion }} release:prepare
+        run: ./mvnw -B -V -ntp -Prelease -Dgpg.skip=true -DreleaseVersion=${{ inputs.releaseVersion }} -DdevelopmentVersion=${{ inputs.developmentVersion }} release:prepare
         env:
           CI_DEPLOY_USERNAME: ${{ secrets.CI_DEPLOY_USERNAME }}
           CI_DEPLOY_PASSWORD: ${{ secrets.CI_DEPLOY_PASSWORD }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       - name: Rollback on failure
         if: failure()
         run: |
-          ./mvnw -B -V -ntp -Prelease release:rollback
+          ./mvnw -B -V -ntp -Prelease -Dgpg.skip=true release:rollback
           echo "You may need to manually delete the GitHub tag, if it was created."
