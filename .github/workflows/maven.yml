@@ -42,7 +42,7 @@ jobs:
           distribution: ${{ inputs.java-distribution }}
           java-version: ${{ inputs.java-version }}
       - name: Cache SonarCloud packages
-        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && inputs.java-version == '17' && inputs.runner == 'ubuntu-latest' }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
