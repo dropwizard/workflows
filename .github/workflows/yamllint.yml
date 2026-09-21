@@ -12,7 +12,7 @@ jobs:
       - name: ⤵️ Check out configuration from GitHub
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: 🧹 Run yamllint
-        uses: reviewdog/action-yamllint@6803b0dc8f295034a6156b924814053acb2e6f5a # v1.24.0
+        uses: reviewdog/action-yamllint@290d92c84b22627946efc7fd6f038ade2d2beede # v1.25.0
         with:
           yamllint_flags: |
             --config-data "{rules: {line-length: {max: 120}}}" .
